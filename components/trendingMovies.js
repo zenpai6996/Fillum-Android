@@ -21,14 +21,14 @@ export default function TrendingMovies({ data }) {
         <View className="mb-8 mt-5 ">
             <Text style={{fontSize:20,
               marginLeft:15  
-            }}className="text-white t mx-4 mb-0">Trending</Text>
+            }}className="text-white  mx-4 mb-0">Trending</Text>
             
 
             <Carousel
                 autoPlayInterval={2000}
                 data={data}
                 renderItem={({ item , animationValue}) => <MovieCard item={item} handleClick={handleClick} animationValue={animationValue}/>}
-                height={height*0.6}
+                height={height*0.5}
                 width={width}
                 mode="parallax"
                 style={{ alignItems: 'center' ,justifyContent:'center', alignSelf:'center'}}
@@ -36,7 +36,7 @@ export default function TrendingMovies({ data }) {
                 snapEnabled={true}
                 modeConfig={{
                     parallaxScrollingScale: 0.9, // Controls zoom effect
-                    parallaxScrollingOffset: 100, // Adjust offset for centering
+                    parallaxScrollingOffset: 130, // Adjust offset for centering
                     parallaxAdjacentItemScale: 0.8, // Scale for non-active items
                 }}
                 
@@ -64,8 +64,8 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
              <Animated.View
         style={[
           {
-            width: width * 0.8, // Adjust width as needed
-            height: height * 0.6, // Adjust height as needed
+            width: width * 0.7, // Adjust width as needed
+            height: height * 0.5, // Adjust height as needed
             borderRadius: 20,
             overflow: 'hidden',
             alignSelf:'center'
@@ -74,10 +74,10 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
         ]}
       >
             <Image
-            source={require('../assets/images/movie-poster.png')}
+            source={require('../assets/images (1).png')}
             style={[{
-                width:width*0.8,
-                height:height*0.6,
+                width:width*0.7,
+                height:height*0.5,
                 borderRadius:20,
                 alignItems:'center',
                 justifyContent:'center',
