@@ -3,6 +3,7 @@ import React from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Animated , {interpolate,useAnimatedStyle} from 'react-native-reanimated';
 
 
 
@@ -26,7 +27,7 @@ export default function TrendingMovies({ data }) {
             <Carousel
                 autoPlayInterval={2000}
                 data={data}
-                renderItem={({ item }) => <MovieCard item={item} handleClick={handleClick}/>}
+                renderItem={({ item , animationValue}) => <MovieCard item={item} handleClick={handleClick} animationValue={animationValue}/>}
                 height={height*0.6}
                 width={width}
                 mode="parallax"
@@ -47,19 +48,46 @@ export default function TrendingMovies({ data }) {
 
 
 
-const MovieCard = ({ item , handleClick}) => {
+const MovieCard = ({ item , handleClick , animationValue}) => {
+    const animatedStyle = useAnimatedStyle(() =>{
+        const opacity = interpolate(
+            animationValue.value,
+            [-1,0,1],
+            [0.5,1,0.5,5]
+        );
+        return {
+            opacity,
+        };
+    });
     return (
         <TouchableWithoutFeedback onPress={handleClick}>
+             <Animated.View
+        style={[
+          {
+            width: width * 0.8, // Adjust width as needed
+            height: height * 0.6, // Adjust height as needed
+            borderRadius: 20,
+            overflow: 'hidden',
+            alignSelf:'center'
+          },
+          animatedStyle, // Apply animated opacity
+        ]}
+      >
             <Image
             source={require('../assets/images/movie-poster.png')}
-            style={{
+            style={[{
                 width:width*0.8,
                 height:height*0.6,
                 borderRadius:20,
+                alignItems:'center',
+                justifyContent:'center',
                 alignSelf:'center'
-            }}
-           
+                
+            },
+            animatedStyle,
+        ]}
             />
+            </Animated.View>
         </TouchableWithoutFeedback>
     );
 };

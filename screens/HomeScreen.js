@@ -10,7 +10,10 @@ import {useState} from 'react';
 
 const ios = Platform.OS =='ios';
 export default function HomeScreen() {
+
     const [trending, settrending] = useState([1,2,3])
+    
+
   return(
     <View className="flex-1 bg-neutral-800">
         {/* search bar and logo */}
