@@ -12,7 +12,7 @@ var {width,height} = Dimensions.get('window');
 export default function TrendingMovies({ data }) {
     
     const navigation = useNavigation();
-    const handleClick = () => {
+    const handleClick = (item) => {
         navigation.navigate('Movie',item);
     }
 
@@ -32,8 +32,6 @@ export default function TrendingMovies({ data }) {
                 width={width}
                 mode="parallax"
                 style={{ alignItems: 'center' ,justifyContent:'center', alignSelf:'center'}}
-                pagingEnabled={true}
-                snapEnabled={true}
                 modeConfig={{
                     parallaxScrollingScale: 0.9, // Controls zoom effect
                     parallaxScrollingOffset: 130, // Adjust offset for centering
@@ -60,7 +58,7 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
         };
     });
     return (
-        <TouchableWithoutFeedback onPress={handleClick}>
+        <TouchableWithoutFeedback onPress={() => handleClick(item)}>
              <Animated.View
         style={[
           {

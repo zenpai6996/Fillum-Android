@@ -1,5 +1,5 @@
 export const theme ={
-    background: "#eab308",
+    background: "#AB8BFF",
     text:"#AB8BFF"
 }
 export const styles = {
