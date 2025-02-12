@@ -25,7 +25,8 @@ export default function TrendingMovies({ data }) {
             
 
             <Carousel
-                autoPlayInterval={2000}
+                autoPlay
+                autoPlayInterval={7000}
                 data={data}
                 renderItem={({ item , animationValue}) => <MovieCard item={item} handleClick={handleClick} animationValue={animationValue}/>}
                 height={height*0.5}
@@ -34,7 +35,7 @@ export default function TrendingMovies({ data }) {
                 style={{ alignItems: 'center' ,justifyContent:'center', alignSelf:'center'}}
                 modeConfig={{
                     parallaxScrollingScale: 0.9, // Controls zoom effect
-                    parallaxScrollingOffset: 130, // Adjust offset for centering
+                    parallaxScrollingOffset: 120, // Adjust offset for centering
                     parallaxAdjacentItemScale: 0.8, // Scale for non-active items
                 }}
                 
@@ -51,7 +52,7 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
         const opacity = interpolate(
             animationValue.value,
             [-1,0,1],
-            [0.5,1,0.5,5]
+            [0.5,1,0.5]
         );
         return {
             opacity,
@@ -77,9 +78,8 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
                 width:width*0.7,
                 height:height*0.5,
                 borderRadius:20,
-                alignItems:'center',
-                justifyContent:'center',
-                alignSelf:'center'
+                alignSelf:'center',
+                overflow:'hidden'
                 
             },
             animatedStyle,

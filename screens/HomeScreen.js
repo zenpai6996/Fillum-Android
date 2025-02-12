@@ -33,7 +33,7 @@ export default function HomeScreen() {
         </SafeAreaView>
             <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 10}}
+            contentContainerStyle={{paddingBottom: 10,backgroundColor:'#262626'}}
             >
                 {/*Trending Movies carousel*/}
             <TrendingMovies data={trending}/>

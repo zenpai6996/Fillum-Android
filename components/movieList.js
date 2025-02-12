@@ -16,7 +16,7 @@ export default function MovieList ({title , data}) {
   return (
     <View className="mb-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
-        <Text className="text-white text-xl" style={{fontSize:20}}>
+        <Text className=" text-xl" style={{fontSize:20,color:'#AB8BFF'}}>
           {title}
         </Text>
         <TouchableOpacity>
@@ -44,7 +44,7 @@ export default function MovieList ({title , data}) {
                   marginLeft:15
                 }}
                 />
-              <Text className="text-neutral-300 ml-1">
+              <Text style={{color:"white"}} className="ml-1">
                 {movieName.length>14 ? movieName.slice(0,14)+'...':movieName}
                 </Text>
                 </View>

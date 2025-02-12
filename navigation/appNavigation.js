@@ -8,7 +8,13 @@ const Stack = createNativeStackNavigator();
 export default function AppNavigation(){
   return(
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator 
+      screenOptions={{
+        headerShown: false,
+        animation: 'slide_from_left',
+        contentStyle: { backgroundColor:"#262626" },
+      }}
+      >
         <Stack.Screen name="Home" options={{headerShown:false}} component={HomeScreen}/>
         <Stack.Screen name="Movie" options={{headerShown:false}} component={MovieScreen}/>
       </Stack.Navigator>
