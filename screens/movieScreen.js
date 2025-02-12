@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { theme } from '../themes/_index';
 import { Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Cast from '../components/cast';
 
   var {width,height} = Dimensions.get('window');
   const ios = Platform.OS == 'ios';
@@ -17,14 +18,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MovieScreen(){
 
+  let movieName='Thunderbolts*';
   const navigation = useNavigation();
   const [isFavourite, toggleFavourite] = useState(false);
   const {params: item} = useRoute();
+  const [cast, setcast] = useState([1,2,3,4,5]);
   useEffect(() => {
 
   },[item])
   return (
-    <ScrollView contentContainerStyle={{paddingBottom:20,backgroundColor:'#262626'}}
+    <ScrollView 
     className="flex-1 bg-neutral-900"
     >
       {/* back button and movie poster */}
@@ -39,12 +42,50 @@ export default function MovieScreen(){
         </SafeAreaView>
         <View>
           <Image
-          source={require('../assets/images (1).png')}
-          style={{width,height:height*0.55}}
+          source={require('../assets/imagesy.png')}
+          style={{width,height:height*0.6}}
           />
-          
+          <LinearGradient 
+          colors={['transparent', 'rgba(23,23,23,0.7)','rgba(23,23,23,1)']}
+          style={{width,height:height*0.45}}
+          start={{x:0.5,y:0}}
+          end={{x:0.5,y:1}}
+          className="absolute bottom-0"
+          />
+          </View>
         </View>
+        <View style={{marginTop: -(height*0.05)}} className="space-y-4">
+          {/* movie details */}
+          <Text className="text-white text-center text-3xl font-bold tracking-wider mb-3"> 
+            {
+              movieName
+            }
+          </Text>
+          {/* status release date runtime */}
+          <Text className="text-neutral-400 font-semibold text-base text-center mb-2">
+            Released • 2025 • 170 min
+          </Text>
+          {/* genres */}
+          <View className="flex-row space-x-4 justify-center mb-2">
+            <Text className="text-neutral-400 mx-2 font-semibold text-base text-center">
+              Action •
+            </Text>
+            <Text className="text-neutral-400  mx-2 font-semibold text-base text-center">
+              Thrill • 
+            </Text>
+            <Text className="text-neutral-400  mx-2 font-semibold text-base text-center">
+               Comedy 
+            </Text>
+          </View>
+            
+        </View>
+      <View>
+        <Text className="text-neutral-400 mx-4 tracking-wider "> 
+        A group of antiheroes are caught in a deadly trap by Valentina Allegra de Fontaine and are forced into a dangerous mission that could bring them redemption if they unite as a team.
+        </Text>
       </View>
+      {/* cast */}
+            <Cast cast={cast}/>
     </ScrollView>
   )
 }
