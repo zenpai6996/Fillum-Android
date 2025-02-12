@@ -26,7 +26,7 @@ export default function TrendingMovies({ data }) {
 
             <Carousel
                 autoPlay
-                autoPlayInterval={7000}
+                autoPlayInterval={6000}
                 data={data}
                 renderItem={({ item , animationValue}) => <MovieCard item={item} handleClick={handleClick} animationValue={animationValue}/>}
                 height={height*0.5}
