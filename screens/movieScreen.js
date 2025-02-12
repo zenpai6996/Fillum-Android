@@ -11,6 +11,7 @@ import { theme } from '../themes/_index';
 import { Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '../components/cast';
+import MovieList from '../components/movieList';
 
   var {width,height} = Dimensions.get('window');
   const ios = Platform.OS == 'ios';
@@ -23,6 +24,7 @@ export default function MovieScreen(){
   const [isFavourite, toggleFavourite] = useState(false);
   const {params: item} = useRoute();
   const [cast, setcast] = useState([1,2,3,4,5]);
+  const [similarMovies, setSimilarMovies] = useState([1,2,3,4,5]);
   useEffect(() => {
 
   },[item])
@@ -63,17 +65,17 @@ export default function MovieScreen(){
           </Text>
           {/* status release date runtime */}
           <Text className="text-neutral-400 font-semibold text-base text-center mb-2">
-            Released • 2025 • 170 min
+            Released  •  2025  •  170 min
           </Text>
           {/* genres */}
-          <View className="flex-row space-x-4 justify-center mb-2">
-            <Text className="text-neutral-400 mx-2 font-semibold text-base text-center">
-              Action •
+          <View className="flex-row space-x-4 justify-center mb-2 text-center">
+            <Text className="text-neutral-400 mx-2 font-semibold text-base ">
+              Action   •
             </Text>
-            <Text className="text-neutral-400  mx-2 font-semibold text-base text-center">
-              Thrill • 
+            <Text className="text-neutral-400  mx-2 font-semibold text-base ">
+              Thrill   • 
             </Text>
-            <Text className="text-neutral-400  mx-2 font-semibold text-base text-center">
+            <Text className="text-neutral-400  mx-2 font-semibold text-base ">
                Comedy 
             </Text>
           </View>
@@ -85,7 +87,9 @@ export default function MovieScreen(){
         </Text>
       </View>
       {/* cast */}
-            <Cast cast={cast}/>
+            <Cast navigation={navigation} cast={cast}/>
+      {/* similar movies */}
+      <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies}/>
     </ScrollView>
   )
 }

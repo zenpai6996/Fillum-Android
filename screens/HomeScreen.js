@@ -22,12 +22,12 @@ export default function HomeScreen() {
         <SafeAreaView className={ios? "-mb-2" : "mb-3 mt-5"}>
             <StatusBar style="light"/>
             <View className="flex-row justify-between items-center mx-4">
-                <Bars3CenterLeftIcon size="30" strokeWidth={2} color="white"/>
-                <Text className="text-white text-4xl font-bold">
-                    <Text style={styles.text}>F</Text>illum
+                <Bars3CenterLeftIcon size="30" strokeWidth={2} color="#AB8BFF"/>
+                <Text className=" text-4xl font-bold" style={styles.text}>
+                    Fillum
                 </Text>
                 <TouchableOpacity>
-                    <MagnifyingGlassIcon size="30" strokeWidth={2} color="white" />
+                    <MagnifyingGlassIcon size="30" strokeWidth={2} color="#AB8BFF" />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

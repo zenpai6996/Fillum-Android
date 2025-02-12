@@ -8,20 +8,22 @@ import { Dimensions } from 'react-native';
 
 var {width,height} = Dimensions.get('window');
 
-export default function MovieList ({title , data}) {
+export default function MovieList ({title , data ,hideSeeAll}) {
 
   let movieName = 'Spiderman Across the SpiderVerse';
   const navigation = useNavigation();
 
   return (
-    <View className="mb-8 space-y-4">
+    <View className="mb-8 space-y-4" style={{marginTop:8}}>
       <View className="mx-4 flex-row justify-between items-center">
-        <Text className=" text-xl" style={{fontSize:20,color:'#AB8BFF'}}>
+        <Text className=" text-xl" style={{fontSize:20,color:'#fff'}}>
           {title}
         </Text>
-        <TouchableOpacity>
+        {!hideSeeAll && (
+          <TouchableOpacity>
           <Text style={styles.text} className="text-lg">See All</Text>
         </TouchableOpacity>
+        )}
       </View>
       {/* movie row */}
       <ScrollView 
@@ -32,7 +34,7 @@ export default function MovieList ({title , data}) {
        {
         data.map((item, index) => {
           return(<>
-            <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('Movie',item)}>
+            <TouchableWithoutFeedback key={index} onPress={() => navigation.push('Movie',item)}>
               <View className="space-y-1 mr-4">
                 <Image source={require('../assets/images (1).png')} 
                 
@@ -44,7 +46,7 @@ export default function MovieList ({title , data}) {
                   marginLeft:15
                 }}
                 />
-              <Text style={{color:"white"}} className="ml-1">
+              <Text style={{color:"#BAC2C6"}} className="ml-1">
                 {movieName.length>14 ? movieName.slice(0,14)+'...':movieName}
                 </Text>
                 </View>
