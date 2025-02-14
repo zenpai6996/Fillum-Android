@@ -47,7 +47,7 @@ export default function MovieList ({title , data ,hideSeeAll}) {
                   marginLeft:15
                 }}
                 />
-              <Text style={{color:"#BAC2C6"}} className="ml-1">
+              <Text style={{color:"#BAC2C6" ,marginBottom:5}} className="ml-1">
                 {movieName.length>14 ? movieName.slice(0,14)+'...':movieName}
                 </Text>
                 </View>
