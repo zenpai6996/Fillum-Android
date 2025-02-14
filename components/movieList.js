@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 import { Dimensions } from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 
 var {width,height} = Dimensions.get('window');
 
@@ -29,7 +30,7 @@ export default function MovieList ({title , data ,hideSeeAll}) {
       <ScrollView 
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{paddingHorizontal:15}}
+      contentContainerStyle={{paddingHorizontal:0}}
       >
        {
         data.map((item, index) => {

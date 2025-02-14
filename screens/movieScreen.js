@@ -12,6 +12,7 @@ import { Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '../components/cast';
 import MovieList from '../components/movieList';
+import Loading from "../components/loading";
 
   var {width,height} = Dimensions.get('window');
   const ios = Platform.OS == 'ios';
@@ -25,6 +26,7 @@ export default function MovieScreen(){
   const {params: item} = useRoute();
   const [cast, setcast] = useState([1,2,3,4,5]);
   const [similarMovies, setSimilarMovies] = useState([1,2,3,4,5]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
 
   },[item])
@@ -42,12 +44,19 @@ export default function MovieScreen(){
             <HeartIcon size={"35"} color={isFavourite? theme.background : "white"}/>
           </TouchableOpacity>
         </SafeAreaView>
+        {/*{*/}
+        {/*  loading?(*/}
+        {/*    <Loading/>*/}
+        {/*  ):(*/}
+
+        {/*  )*/}
+        {/*}*/}
         <View>
           <Image
           source={require('../assets/imagesy.png')}
           style={{width,height:height*0.6}}
           />
-          <LinearGradient 
+          <LinearGradient
           colors={['transparent', 'rgba(23,23,23,0.7)','rgba(23,23,23,1)']}
           style={{width,height:height*0.45}}
           start={{x:0.5,y:0}}
