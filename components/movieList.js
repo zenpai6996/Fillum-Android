@@ -6,13 +6,15 @@ import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
+import {image185, image500} from "../api/moviedb";
 
 var {width,height} = Dimensions.get('window');
 
 export default function MovieList ({title , data ,hideSeeAll}) {
 
-  let movieName = 'Spiderman Across the SpiderVerse';
   const navigation = useNavigation();
+
+
 
   return (
     <View className="mb-8 space-y-4" style={{marginTop:8}}>
@@ -34,11 +36,10 @@ export default function MovieList ({title , data ,hideSeeAll}) {
       >
        {
         data.map((item, index) => {
-          return(<>
+          return(
             <TouchableWithoutFeedback key={index} onPress={() => navigation.push('Movie',item)}>
               <View className="space-y-1 mr-4">
-                <Image source={require('../assets/images (1).png')} 
-                
+                <Image source={{uri: image185(item.poster_path)}}
                 style={{
                   width: width*0.33,
                   height: height*0.22,
@@ -47,12 +48,12 @@ export default function MovieList ({title , data ,hideSeeAll}) {
                   marginLeft:15
                 }}
                 />
-              <Text style={{color:"#BAC2C6" ,marginBottom:5}} className="ml-1">
-                {movieName.length>14 ? movieName.slice(0,14)+'...':movieName}
+              <Text style={{color:"#BAC2C6" ,marginBottom:5}} className="ml-1 text-center">
+                  {item.title.length>14? item.title.substring(0,14) + '...': item.title}
                 </Text>
                 </View>
             </TouchableWithoutFeedback>
-            </>
+
           )
         })
        } 
