@@ -44,26 +44,26 @@ export default function MovieScreen(){
             <HeartIcon size={"35"} color={isFavourite? theme.background : "white"}/>
           </TouchableOpacity>
         </SafeAreaView>
-        {/*{*/}
-        {/*  loading?(*/}
-        {/*    <Loading/>*/}
-        {/*  ):(*/}
+        {
+          loading?(
+            <Loading/>
+          ):(
+              <View>
+                <Image
+                    source={require('../assets/imagesy.png')}
+                    style={{width,height:height*0.6}}
+                />
+                <LinearGradient
+                    colors={['transparent', 'rgba(23,23,23,0.7)','rgba(23,23,23,1)']}
+                    style={{width,height:height*0.45}}
+                    start={{x:0.5,y:0}}
+                    end={{x:0.5,y:1}}
+                    className="absolute bottom-0"
+                />
+              </View>
+          )
+        }
 
-        {/*  )*/}
-        {/*}*/}
-        <View>
-          <Image
-          source={require('../assets/imagesy.png')}
-          style={{width,height:height*0.6}}
-          />
-          <LinearGradient
-          colors={['transparent', 'rgba(23,23,23,0.7)','rgba(23,23,23,1)']}
-          style={{width,height:height*0.45}}
-          start={{x:0.5,y:0}}
-          end={{x:0.5,y:1}}
-          className="absolute bottom-0"
-          />
-          </View>
         </View>
         <View style={{marginTop: -(height*0.05)}} className="space-y-4">
           {/* movie details */}
