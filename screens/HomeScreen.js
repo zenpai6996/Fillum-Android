@@ -64,8 +64,15 @@ export default function HomeScreen() {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{paddingBottom: 10,backgroundColor:'#262626'}}
                 >
-                    {/*Trending Movies carousel*/}
-                    {trending.length>0 && <TrendingMovies data={trending}/>}
+                    {loading?(
+                            <Text className=" text-4xl font-bold" style={styles.text}>
+                                Try using a VPN (●'◡'●)
+                            </Text>
+                        )
+                        :(
+                         <TrendingMovies data={trending}/>
+                    )
+                    }
 
                     {/* upcoming movies */}
                     {upcoming.length>0 && <MovieList title="Upcoming" data={upcoming}/>}

@@ -1,18 +1,18 @@
 import { View, Text ,ScrollView, TouchableOpacity, Platform } from 'react-native'
-import React, { useEffect } from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronDoubleLeftIcon} from 'react-native-heroicons/mini';
 import { styles } from '../themes/_index';
 import { Dimensions } from 'react-native';
 import { HeartIcon} from 'react-native-heroicons/solid';
-import { useState } from 'react';
 import { theme } from '../themes/_index';
 import { Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '../components/cast';
 import MovieList from '../components/movieList';
 import Loading from "../components/loading";
+import {fallBackMoviePoster, fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500} from "../api/moviedb";
 
   var {width,height} = Dimensions.get('window');
   const ios = Platform.OS == 'ios';
@@ -20,16 +20,36 @@ import Loading from "../components/loading";
 
 export default function MovieScreen(){
 
-  let movieName='Thunderbolts*';
   const navigation = useNavigation();
   const [isFavourite, toggleFavourite] = useState(false);
   const {params: item} = useRoute();
-  const [cast, setcast] = useState([1,2,3,4,5]);
-  const [similarMovies, setSimilarMovies] = useState([1,2,3,4,5]);
+  const [cast, setCast] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
+  const [movie, setMovie] = useState([]);
 
-  },[item])
+  useEffect(() => {
+    setLoading(true);
+    getMovieDetails(item.id);
+    getMovieCredits(item.id);
+    getSimilarMovies(item.id);
+  },[item]);
+
+  const getMovieDetails = async id => {
+    const data = await fetchMovieDetails(id);
+    if(data) setMovie(data);
+    setLoading(false);
+  }
+  const getMovieCredits = async id =>{
+    const data = await fetchMovieCredits(id);
+    if(data && data.cast) setCast(data.cast);
+  }
+  const getSimilarMovies = async id => {
+    const data = await fetchSimilarMovies(id);
+    if(data && data.results) setSimilarMovies(data.results);
+
+  }
+
   return (
     <ScrollView 
     className="flex-1 bg-neutral-900"
@@ -50,8 +70,11 @@ export default function MovieScreen(){
           ):(
               <View>
                 <Image
-                    source={require('../assets/imagesy.png')}
-                    style={{width,height:height*0.6}}
+                    source={{uri:image500(movie.poster_path)||fallBackMoviePoster}}
+                    style={{
+                      width,
+                      height:height*0.6,
+                    }}
                 />
                 <LinearGradient
                     colors={['transparent', 'rgba(23,23,23,0.7)','rgba(23,23,23,1)']}
@@ -69,36 +92,41 @@ export default function MovieScreen(){
           {/* movie details */}
           <Text className="text-white text-center text-3xl font-bold tracking-wider mb-3"> 
             {
-              movieName
+              movie.title  || "Error"
             }
           </Text>
-          {/* status release date runtime */}
-          <Text className="text-neutral-400 font-semibold text-base text-center mb-2">
-            Released  •  2025  •  170 min
-          </Text>
+          {
+            movie?.id?(
+                <Text className="text-neutral-400 font-semibold text-base text-center mb-2 ">
+                  {movie.status}  •  {movie.release_date.split('-')[0]}  •  {movie.runtime} min
+                </Text>
+            ) : null
+          }
+
+
           {/* genres */}
-          <View className="flex-row space-x-4 justify-center mb-2 text-center">
-            <Text className="text-neutral-400 mx-2 font-semibold text-base ">
-              Action   •
-            </Text>
-            <Text className="text-neutral-400  mx-2 font-semibold text-base ">
-              Thrill   • 
-            </Text>
-            <Text className="text-neutral-400  mx-2 font-semibold text-base ">
-               Comedy 
-            </Text>
+          <View className="flex-row space-x-4 justify-center mb-3 text-center mt-5">
+            {
+              movie?.genres?.map((genre,index) =>{
+                let showDot = index+1 != movie.genres.length;
+                return (
+              <Text key={index} className="text-neutral-400 mx-2 font-semibold text-base ">
+                {genre?.name}   {showDot?"•":null}
+              </Text>
+              )
+            })}
           </View>
             
         </View>
       <View>
-        <Text className="text-neutral-400 mx-4 tracking-wider "> 
-        A group of antiheroes are caught in a deadly trap by Valentina Allegra de Fontaine and are forced into a dangerous mission that could bring them redemption if they unite as a team.
+        <Text className="text-neutral-400 mx-4 tracking-wider ">
+          {movie?.overview}
         </Text>
       </View>
       {/* cast */}
             <Cast navigation={navigation} cast={cast}/>
       {/* similar movies */}
-      {/*<MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies}/>*/}
+      <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies}/>
     </ScrollView>
   )
 }

@@ -3,6 +3,7 @@ import React from 'react'
 import {styles} from '../themes/_index';
 import { ScrollView } from 'react-native';
 import { Image } from 'react-native';
+import {fallBackPersonImage, image185} from "../api/moviedb";
 
 const Cast = ({cast , navigation}) => {
   let personName = "Keanu Reeves";
@@ -34,24 +35,24 @@ const Cast = ({cast , navigation}) => {
               <Image
                 style={{
                 borderRadius:75,
-                height:120,
-                width:120,
+                height:130,
+                width:130,
                 marginRight:12,
                 borderWidth:3,
                 borderColor:"#6A6F72"
               }}
                className="rounded-2xl h-24 w-20"
-                source={require('../assets/Keanu.png')}
+                source={{uri: image185(person?.profile_path) || fallBackPersonImage}}
               />
               </View>
               <Text className="text-white text-xs mt-3">
                 {
-                  charectorName.length>10 ? charectorName.slice(0,10)+"..." : charectorName
+                  person?.character.length>10 ? person?.character.slice(0,10)+'...':person?.character
                 }
               </Text>
-              <Text className="text-neutral-400 text-xs mt-3">
+              <Text className="text-neutral-400 text-xs mt-3 " style={{marginBottom:5}}>
                 {
-                  personName.length>10 ? personName.slice(0,10)+"..." : personName
+                  person?.original_name.length>14?person?.original_name.slice(0,10)+'...':person?.original_name
                 }
               </Text>
             </TouchableOpacity>

@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import {image185, image500} from "../api/moviedb";
+import {fallBackMoviePoster, image185, image500} from "../api/moviedb";
 
 var {width,height} = Dimensions.get('window');
 
@@ -39,7 +39,7 @@ export default function MovieList ({title , data ,hideSeeAll}) {
           return(
             <TouchableWithoutFeedback key={index} onPress={() => navigation.push('Movie',item)}>
               <View className="space-y-1 mr-4">
-                <Image source={{uri: image185(item.poster_path)}}
+                <Image source={{uri: image185(item.poster_path) || fallBackMoviePoster}}
                 style={{
                   width: width*0.33,
                   height: height*0.22,

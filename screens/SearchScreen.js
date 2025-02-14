@@ -56,7 +56,7 @@ export default function SearchScreen() {
                                                     <View className={"space-y-2 mb-4 mt-3"}>
                                                         <Image
                                                             className={"rounded-3xl"}
-                                                            source={require('../assets/images (1).png')}
+                                                            source={require('../assets/imagesy.png')}
                                                             style={{
                                                                 width: width*0.45,
                                                                 height: height*0.3,

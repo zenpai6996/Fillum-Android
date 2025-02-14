@@ -4,7 +4,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Animated , {interpolate,useAnimatedStyle} from 'react-native-reanimated';
-import {image500} from "../api/moviedb";
+import {fallBackMoviePoster, image500} from "../api/moviedb";
 
 
 
@@ -87,7 +87,7 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
         ]}
       >
             <Image
-            source={{uri: image500(item.poster_path)}}
+            source={{uri: image500(item.poster_path) || fallBackMoviePoster}}
             style={[{
                 width:width*0.7,
                 height:height*0.5,
