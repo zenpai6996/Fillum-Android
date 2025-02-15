@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import {fallBackMoviePoster, image185, image500} from "../api/moviedb";
+import {fallBackMoviePoster, image185, image500} from "../api/MovieDB"
 
 var {width,height} = Dimensions.get('window');
 

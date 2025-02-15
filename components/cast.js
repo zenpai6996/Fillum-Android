@@ -3,7 +3,7 @@ import React from 'react'
 import {styles} from '../themes/_index';
 import { ScrollView } from 'react-native';
 import { Image } from 'react-native';
-import {fallBackPersonImage, image185} from "../api/moviedb";
+import {fallBackPersonImage, image185} from "../api/MovieDB";
 
 const Cast = ({cast , navigation}) => {
   let personName = "Keanu Reeves";
@@ -26,8 +26,7 @@ const Cast = ({cast , navigation}) => {
             key={index}
               className=" items-center"
               style={{
-                marginRight:10,
-                marginTop:20
+                marginRight:10
               }}
               onPress={() => navigation.navigate('Person',person)}
             >
@@ -37,11 +36,11 @@ const Cast = ({cast , navigation}) => {
                 borderRadius:75,
                 height:130,
                 width:130,
-                marginRight:12,
+                marginRight:9,
                 borderWidth:3,
                 borderColor:"#6A6F72"
               }}
-               className="rounded-2xl h-24 w-20"
+               className="rounded-2xl h-20 w-20"
                 source={{uri: image185(person?.profile_path) || fallBackPersonImage}}
               />
               </View>

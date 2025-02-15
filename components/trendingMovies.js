@@ -4,7 +4,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Animated , {interpolate,useAnimatedStyle} from 'react-native-reanimated';
-import {fallBackMoviePoster, image500} from "../api/moviedb";
+import {fallBackMoviePoster, image500} from "../api/MovieDB";
 
 
 

@@ -9,7 +9,7 @@ import TrendingMovies from "../components/trendingMovies";
 import MovieList from '../components/movieList';
 import {useNavigation} from "@react-navigation/native";
 import Loading from "../components/loading";
-import {fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies} from "../api/moviedb";
+import {fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies} from "../api/MovieDB";
 
 
 const ios = Platform.OS =='ios';

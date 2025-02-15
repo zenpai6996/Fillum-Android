@@ -12,7 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Cast from '../components/cast';
 import MovieList from '../components/movieList';
 import Loading from "../components/loading";
-import {fallBackMoviePoster, fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500} from "../api/moviedb";
+import {fallBackMoviePoster, fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500} from "../api/MovieDB";
 
   var {width,height} = Dimensions.get('window');
   const ios = Platform.OS == 'ios';
