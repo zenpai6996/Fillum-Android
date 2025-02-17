@@ -24,7 +24,10 @@ Fillum-Android is a mobile application designed to provide users with a rich col
 - [ ] Adding API integration for TV series as well.
 - [ ] Adding your favourite actor or movie to a separate page to keep track .
 
-[⬆ Back to Top](##overview)
+<p align="right">
+  <a href="#overview"><img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-blue" alt="Back to Top"></a>
+</p>
+
 
 > [!CAUTION]
 >Some mobile carriers seem to have blocked the API used in the app
@@ -52,7 +55,10 @@ you're welcome to make contributions to enhance the Fillum-Android project. To c
    ```
 5. **Create a Pull Request**: Describe your changes and submit the pull request for review.
 
-[⬆ Back to Top](##overview)
+<p align="right">
+  <a href="#overview"><img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-blue" alt="Back to Top"></a>
+</p>
+
 
 ---
 
