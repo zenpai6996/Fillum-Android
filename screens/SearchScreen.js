@@ -50,7 +50,7 @@ export default function SearchScreen() {
                 onChangeText={handleTextDebounce}
                 placeholder="Search for Movies"
                 placeholderTextColor={'lightgray'}
-                className={"pb-3 pl-6 flex-1 text-base font-semibold text-white tracking-wider"}
+                className={" pl-6 flex-1 text-base font-semibold text-white tracking-wider"}
                 />
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Home')}

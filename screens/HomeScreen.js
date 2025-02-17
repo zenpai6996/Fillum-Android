@@ -3,8 +3,6 @@ import React, {useEffect, useState} from 'react'
 import {View, Text, Platform, TouchableOpacity, ScrollView} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
-import {Bars3CenterLeftIcon, ChevronDoubleLeftIcon, MagnifyingGlassIcon} from "react-native-heroicons/mini";
-import {styles} from '../themes/_index';
 import TrendingMovies from "../components/trendingMovies";
 import MovieList from '../components/movieList';
 import {useNavigation} from "@react-navigation/native";
@@ -46,15 +44,18 @@ export default function HomeScreen() {
         {/* search bar and logo */}
         <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 " } style={{position:'absolute'}}>
             <StatusBar style="light"/>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")} className="rounded-xl p-1 ">
+            <TouchableOpacity onPress={() => navigation.navigate("Home")} className="rounded-xl p-1 mt-5 ">
             <Image style={{
-                height:38,
-                width:38,
-            }} source={require('../assets/movie_11524268.png')}/>
+                height:30,
+                width:30,
+            }} source={require('../assets/menu.png')}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-                <MagnifyingGlassIcon size="30" strokeWidth={2} color="#AB8BFF" />
+            <TouchableOpacity onPress={() => navigation.navigate('Search')} className="rounded-xl p-1 mt-5 ">
+                <Image style={{
+                    height:30,
+                    width:30,
+                }} source={require('../assets/search.png')}/>
             </TouchableOpacity>
 
         </SafeAreaView>
