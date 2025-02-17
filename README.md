@@ -4,7 +4,7 @@
 
 ## Overview
 
-Fillum-Android is a mobile application designed to provide users with a rich collection of short films and musical stories from around the globe. The app offers content in various languages, including Italian, Greek, French, Spanish, and multiple regional Indian languages, catering to a diverse audience.
+Fillum is a mobile application designed to provide users with a rich collection of short films and musical stories from around the globe. The app offers content in various languages, including Italian, Greek, French, Spanish, and multiple regional Indian languages, catering to a diverse audience.
 
 ## Built with
 
