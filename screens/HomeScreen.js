@@ -3,14 +3,14 @@ import React, {useEffect, useState} from 'react'
 import {View, Text, Platform, TouchableOpacity, ScrollView} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
-import {Bars3CenterLeftIcon,  MagnifyingGlassIcon} from "react-native-heroicons/mini";
+import {Bars3CenterLeftIcon, ChevronDoubleLeftIcon, MagnifyingGlassIcon} from "react-native-heroicons/mini";
 import {styles} from '../themes/_index';
 import TrendingMovies from "../components/trendingMovies";
 import MovieList from '../components/movieList';
 import {useNavigation} from "@react-navigation/native";
 import Loading from "../components/loading";
 import {fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies} from "../api/MovieDB";
-
+import {Image} from "react-native";
 
 const ios = Platform.OS =='ios';
 export default function HomeScreen() {
@@ -42,47 +42,45 @@ export default function HomeScreen() {
         setLoading(false);
     }
   return(
-    <View className="flex-1 bg-neutral-800">
+    <View className="flex-1 bg-neutral-900">
         {/* search bar and logo */}
-        <SafeAreaView className={ios? "-mb-2" : "mb-3 mt-5"}>
+        <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 " } style={{position:'absolute'}}>
             <StatusBar style="light"/>
-            <View className="flex-row justify-between items-center mx-4">
-                <Bars3CenterLeftIcon size="30" strokeWidth={2} color="#AB8BFF"/>
-                <Text className=" text-4xl font-bold" style={styles.text}>
-                    Fillum
-                </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-                    <MagnifyingGlassIcon size="30" strokeWidth={2} color="#AB8BFF" />
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")} className="rounded-xl p-1 ">
+            <Image style={{
+                height:38,
+                width:38,
+            }} source={require('../assets/movie_11524268.png')}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                <MagnifyingGlassIcon size="30" strokeWidth={2} color="#AB8BFF" />
+            </TouchableOpacity>
+
         </SafeAreaView>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom: 10,backgroundColor:'#171717'}}
+        >
         {
             loading ? (
                 <Loading/>
             ):(
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{paddingBottom: 10,backgroundColor:'#262626'}}
-                >
-                    {loading?(
-                            <Text className=" text-4xl font-bold" style={styles.text}>
-                                Try using a VPN (●'◡'●)
-                            </Text>
-                        )
-                        :(
-                         <TrendingMovies data={trending}/>
-                    )
-                    }
-
-                    {/* upcoming movies */}
-                    {upcoming.length>0 && <MovieList title="Upcoming" data={upcoming}/>}
-
-                    {/* top rated movies row         */}
-                    {topRated.length>0 && <MovieList title="Top Rated" data={topRated}/>}
-
-                </ScrollView>
+                <View>
+                    <TrendingMovies data={trending}/>
+                </View>
             )
         }
+
+
+
+            {/* upcoming movies */}
+            {upcoming.length>0 && <MovieList title="Upcoming" data={upcoming}/>}
+
+            {/* top rated movies row         */}
+            {topRated.length>0 && <MovieList title="Top Rated" data={topRated}/>}
+
+        </ScrollView>
     </View>
   )
 }
