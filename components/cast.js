@@ -1,13 +1,13 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import {View, Text, TouchableOpacity, Dimensions} from 'react-native'
 import React from 'react'
 import {styles} from '../themes/_index';
 import { ScrollView } from 'react-native';
 import { Image } from 'react-native';
 import {fallBackPersonImage, image185} from "../api/MovieDB";
 
+var {width,height} = Dimensions.get('window');
+
 const Cast = ({cast , navigation}) => {
-  let personName = "Keanu Reeves";
-  let charectorName = "John Wick";
   return (
     <View className="my-8 mt-5">
       <Text className={" mx-4 mb-4 "} style={{
@@ -30,14 +30,14 @@ const Cast = ({cast , navigation}) => {
               }}
               onPress={() => navigation.navigate('Person',person)}
             >
-              <View className="overflow-hidden rounded-full h-20 w-20 items-center border-neutral-400">
+              <View  className="overflow-hidden  h-20 w-20 items-center border-neutral-400">
               <Image
                 style={{
-                borderRadius:75,
-                height:130,
-                width:130,
-                marginRight:9,
-                borderWidth:3,
+                width: width*0.33,
+                height: height*0.22,
+                borderRadius:20,
+                marginRight:4,
+                borderWidth:2,
                 borderColor:"#6A6F72"
               }}
                className="rounded-2xl h-20 w-20"

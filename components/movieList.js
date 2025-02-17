@@ -17,7 +17,7 @@ export default function MovieList ({title , data ,hideSeeAll}) {
 
 
   return (
-    <View className="mb-8 space-y-4" style={{marginTop:8}}>
+    <View className="mb-8 space-y-4 bg-neutral-900" style={{marginTop:8}}>
       <View className="mx-4 flex-row justify-between items-center">
         <Text className=" text-xl" style={{fontSize:20,color:'#fff'}}>
           {title}

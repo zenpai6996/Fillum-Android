@@ -5,6 +5,7 @@ import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Animated , {interpolate,useAnimatedStyle} from 'react-native-reanimated';
 import {fallBackMoviePoster, image500} from "../api/MovieDB";
+import {LinearGradient} from "expo-linear-gradient";
 
 
 
@@ -19,26 +20,22 @@ export default function TrendingMovies({ data}) {
 
 
     return (
-        <View className="mb-8 mt-5 ">
-            <Text style={{
-                fontSize:20,
-                marginLeft:15
-            }}className="text-white  mx-4 mb-0">Trending</Text>
-            
+        <View className="mb-8 ">
+
 
             <Carousel
                 autoPlay
-                autoPlayInterval={6000}
+                autoPlayInterval={3000}
                 data={data}
                 renderItem={({ item , animationValue}) => <MovieCard item={item} handleClick={handleClick} animationValue={animationValue}/>}
-                height={height*0.55}
+                height={height*0.75}
                 width={width}
                 mode="parallax"
-                style={{ alignItems: 'center' ,justifyContent:'center', alignSelf:'center', marginTop:5}}
+                style={{ alignItems: 'center' ,justifyContent:'center', alignSelf:'center'}}
                 modeConfig={{
-                    parallaxScrollingScale: 0.9, // Controls zoom effect
-                    parallaxScrollingOffset: 120, // Adjust offset for centering
-                    parallaxAdjacentItemScale: 0.8, // Scale for non-active items
+                    parallaxScrollingScale: 1, // Controls zoom effect
+                    parallaxScrollingOffset: 80, // Adjust offset for centering
+                    parallaxAdjacentItemScale: 1, // Scale for non-active items
                 }}
                 
                 
@@ -54,7 +51,7 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
         const opacity = interpolate(
             animationValue.value,
             [-1,0,1],
-            [0.5,1,0.5]
+            [1,1,1]
         );
         return {
             opacity,
@@ -77,9 +74,8 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
              <Animated.View
         style={[
           {
-            width: width * 0.7, // Adjust width as needed
-            height: height * 0.5, // Adjust height as needed
-            borderRadius: 20,
+            width: width, // Adjust width as needed
+            height: height * 0.7, // Adjust height as needed
             overflow: 'hidden',
             alignSelf:'center'
           },
@@ -89,26 +85,31 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
             <Image
             source={{uri: image500(item.poster_path) || fallBackMoviePoster}}
             style={[{
-                width:width*0.7,
-                height:height*0.5,
-                borderRadius:20,
+                width:width,
+                height:height*0.7,
                 alignSelf:'center',
-                overflow:'hidden'
+
                 
             },
             animatedStyle,
         ]}
             />
+                 <LinearGradient
+                     colors={['transparent', 'rgba(23,23,23,0.7)','rgba(23,23,23,1)']}
+                     style={{width,height:height*0.45}}
+                     start={{x:0.5,y:0.2}}
+                     end={{x:0.5,y:1}}
+                     className="absolute bottom-0"
+                 />
 
             </Animated.View>
                 {/* Title with animated opacity */}
                 <Animated.Text
                     style={[
                         {
-                            height: height * 0.1,
-                            width: width * 1,
+                            height: height ,
+                            width: width ,
                             color: '#BAC2C6',
-                            marginTop: 10,
                             textAlign: 'center',
                             fontSize: 20,
                             fontWeight: 'bold',
@@ -116,7 +117,9 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
                         titleAnimatedStyle, // Apply animated opacity to the title
                     ]}
                 >
+
                     {item.title}
+
                 </Animated.Text>
             </View>
         </TouchableWithoutFeedback>
