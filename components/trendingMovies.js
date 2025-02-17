@@ -1,4 +1,4 @@
-import { View, Text, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import {View, Text, TouchableWithoutFeedback, Dimensions, ScrollView} from 'react-native';
 import React from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import { Image } from 'react-native';
@@ -20,27 +20,26 @@ export default function TrendingMovies({ data}) {
 
 
     return (
-        <View className="mb-8 ">
+
+            <View className="mb-8 ">
+                <Carousel
+                    autoPlay
+                    autoPlayInterval={3000}
+                    data={data}
+                    renderItem={({ item , animationValue}) => <MovieCard item={item} handleClick={handleClick} animationValue={animationValue}/>}
+                    height={height*0.7}
+                    width={width}
+                    mode="parallax"
+                    style={{ alignItems: 'center' ,justifyContent:'center', alignSelf:'center'}}
+                    modeConfig={{
+                        parallaxScrollingScale: 1, // Controls zoom effect
+                        parallaxScrollingOffset: 80, // Adjust offset for centering
+                        parallaxAdjacentItemScale: 1, // Scale for non-active items
+                    }}
+                />
+            </View>
 
 
-            <Carousel
-                autoPlay
-                autoPlayInterval={3000}
-                data={data}
-                renderItem={({ item , animationValue}) => <MovieCard item={item} handleClick={handleClick} animationValue={animationValue}/>}
-                height={height*0.75}
-                width={width}
-                mode="parallax"
-                style={{ alignItems: 'center' ,justifyContent:'center', alignSelf:'center'}}
-                modeConfig={{
-                    parallaxScrollingScale: 1, // Controls zoom effect
-                    parallaxScrollingOffset: 80, // Adjust offset for centering
-                    parallaxAdjacentItemScale: 1, // Scale for non-active items
-                }}
-                
-                
-            />
-        </View>
     );
 }
 
@@ -75,7 +74,7 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
         style={[
           {
             width: width, // Adjust width as needed
-            height: height * 0.7, // Adjust height as needed
+            height: height * 0.65, // Adjust height as needed
             overflow: 'hidden',
             alignSelf:'center'
           },
@@ -86,10 +85,10 @@ const MovieCard = ({ item , handleClick , animationValue}) => {
             source={{uri: image500(item.poster_path) || fallBackMoviePoster}}
             style={[{
                 width:width,
-                height:height*0.7,
+                height:height*0.65,
                 alignSelf:'center',
 
-                
+
             },
             animatedStyle,
         ]}

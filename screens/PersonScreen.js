@@ -71,10 +71,10 @@ const PersonScreen = () => {
                               elevation:10
                           }}
                     >
-                        <View className="items-center rounded-full overflow-hidden h-72 w-72 border-2 border-neutral-700">
+                        <View   className="items-center verflow-hidden h-72 w-72 border-neutral-700">
                             <Image
                                 source={{uri: image342(person?.profile_path || fallBackPersonImage)}}
-                                style={{height:height*0.35,width:width*0.65}}
+                                style={{height:height*0.34,width:width*0.65, borderRadius:20 ,borderWidth:5,borderColor:'#404040', marginBottom:2}}
                             />
                         </View>
                     </View>
