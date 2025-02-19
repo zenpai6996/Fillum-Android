@@ -20,7 +20,7 @@ export default function TrendingMovies({ data}) {
 
 
     return (
-
+                
             <View className="mb-8 ">
                 <Carousel
                     autoPlay

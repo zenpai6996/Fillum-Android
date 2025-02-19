@@ -1,18 +1,19 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import MovieScreen from '../screens/movieScreen';
 import PersonScreen from '../screens/PersonScreen';
 import AboutScreen from '../screens/About';
+import SavedMovies from '../screens/SavedMovies';
 import { Ionicons } from 'react-native-vector-icons';
+import { enableScreens } from 'react-native-screens';
 
+enableScreens();
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
 
 // Stack Navigator for Home and its related screens
 function HomeStack() {
@@ -30,24 +31,19 @@ function HomeStack() {
         </Stack.Navigator>
     );
 }
-function SavedDrawer() {
-    return (
-        <Drawer.Navigator screenOptions={{ headerShown: false ,animation:'slide_from_bottom'}} >
-            <Drawer.Screen name="SavedScreen" component={AboutScreen} />
-            <Drawer.Screen name="Home" component={HomeScreen} />
-        </Drawer.Navigator>
-    );
-}
+
 
 // Bottom Tabs with HomeStack and AboutScreen
 export default function AppNavigation() {
     return (
         <NavigationContainer>
             <Tab.Navigator 
-                screenOptions={({ route }) => ({
+                screenOptions={
+                    
+                    ({ route }) => ({
                     tabBarIcon: ({ color, size }) => {
                         let iconName;
-                        if (route.name === 'Movie') {
+                        if (route.name === 'Home') {
                             iconName = 'home';
                         }else if (route.name === 'Saved') {
                             iconName = 'bookmark';
@@ -61,11 +57,14 @@ export default function AppNavigation() {
                     tabBarInactiveTintColor: 'gray',
                     headerShown: false,
                     tabBarStyle: { backgroundColor: '#171717', paddingBottom: 0},
+                    animationEnabled: true,
+                    tabBarHideOnKeyboard: true,
                 })}
             >
-                <Tab.Screen name="Movie" component={HomeStack} />
+                <Tab.Screen name="Home" component={HomeStack} />
+                <Tab.Screen name="Saved" component={SavedMovies} />
                 <Tab.Screen name="About" component={AboutScreen} />
-                <Tab.Screen name="Saved" component={SavedDrawer} />
+                
 
             </Tab.Navigator>
         </NavigationContainer>
