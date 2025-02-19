@@ -14,6 +14,7 @@ import MovieList from '../components/movieList';
 import Loading from "../components/loading";
 import {fallBackMoviePoster, fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500} from "../api/MovieDB";
 
+
   var {width,height} = Dimensions.get('window');
   const ios = Platform.OS == 'ios';
   const topMargin = ios ? '' : 'mt-3';
@@ -57,7 +58,7 @@ export default function MovieScreen(){
       {/* back button and movie poster */}
       <View className="w-full">
         <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 " + topMargin}>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")} style={styles.background} className="rounded-xl p-1">
+          <TouchableOpacity onPress={() => navigation.goBack("Home")} style={styles.background} className="rounded-xl p-1">
             <ChevronDoubleLeftIcon size="28" strokeWidth={2.5} color="white"/>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => toggleFavourite(!isFavourite)}>

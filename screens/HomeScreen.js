@@ -10,6 +10,8 @@ import Loading from "../components/loading";
 import {fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies} from "../api/MovieDB";
 import {Image} from "react-native";
 
+
+
 const ios = Platform.OS =='ios';
 export default function HomeScreen() {
 
@@ -44,12 +46,13 @@ export default function HomeScreen() {
         {/* search bar and logo */}
         <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 " } style={{position:'absolute'}}>
             <StatusBar style="light"/>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")} className="rounded-xl p-1 mt-5 ">
-            <Image style={{
-                height:30,
-                width:30,
-            }} source={require('../assets/menu.png')}/>
+            <TouchableOpacity onPress={() => navigation.toggleDrawer()} className="rounded-xl p-1 mt-5 ">
+                <Image style={{
+                    height:30,
+                    width:30,
+                }} source={require('../assets/menu.png')}/>
             </TouchableOpacity>
+
 
             <TouchableOpacity onPress={() => navigation.navigate('Search')} className="rounded-xl p-1 mt-5 ">
                 <Image style={{
