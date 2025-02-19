@@ -15,10 +15,10 @@ import {useNavigation} from "@react-navigation/native";
 import Loading from "../components/loading";
 import {debounce} from 'lodash';
 import { fallBackMoviePoster, image185 } from '../api/MovieDB';
-import { fetchSearchMovies } from '../api/MovieDB';
+import { fetchSearchMovies , fetchSearchTv} from '../api/MovieDB';
 
 
-let movieName = "XYZ";
+
 const {width,height} = Dimensions.get('window');
 
 export default function SearchScreen() {
@@ -29,6 +29,16 @@ export default function SearchScreen() {
         if(value && value.length >2){
             setLoading(true);
             fetchSearchMovies({
+                query:value,
+                include_adult:'false',
+                language:'en-US',
+                page:'1'
+            }).then(data=>{
+                setLoading(false);
+                if(data && data.results) setResults(data.results);
+            })
+        }else if(value && value.length >2){
+            fetchSearchTv({
                 query:value,
                 include_adult:'false',
                 language:'en-US',
@@ -75,7 +85,16 @@ export default function SearchScreen() {
                                     {
                                         results.map((item,index) => {
                                             return(
-                                                <TouchableWithoutFeedback key={index} onPress={() => navigation.push("Movie",item)}>
+                                                <TouchableWithoutFeedback
+                                                    key={index}
+                                                    onPress={() => {
+                                                        if (item.title) {
+                                                            navigation.push("Movie", item); // Navigate to the Movie screen if it has a `title`
+                                                        } else if (item.name) {
+                                                            navigation.push("Tv", item); // Navigate to the Tv screen if it has a `name`
+                                                        }
+                                                    }}
+                                                >
                                                     <View className={"space-y-2 mb-4 mt-3"}>
                                                         <Image
                                                             className={"rounded-3xl"}

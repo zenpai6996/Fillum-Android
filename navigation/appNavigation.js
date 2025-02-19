@@ -8,6 +8,7 @@ import MovieScreen from '../screens/movieScreen';
 import PersonScreen from '../screens/PersonScreen';
 import AboutScreen from '../screens/About';
 import SavedMovies from '../screens/SavedMovies';
+import TvScreen from "../screens/TvScreen";
 import { Ionicons } from 'react-native-vector-icons';
 import { enableScreens } from 'react-native-screens';
 
@@ -27,6 +28,7 @@ function HomeStack() {
             <Stack.Screen name="HomeMain" component={HomeScreen} />
             <Stack.Screen name="Search" component={SearchScreen} />
             <Stack.Screen name="Movie" component={MovieScreen} />
+            <Stack.Screen name="Tv" component={TvScreen} />
             <Stack.Screen name="Person" component={PersonScreen} />
         </Stack.Navigator>
     );

@@ -8,9 +8,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../themes/_index';
 import { useNavigation } from '@react-navigation/native';
 import MovieList from "../components/movieList";
+import {TvList} from "../components/movieList";
 import Loading from "../components/loading";
 import { useRoute } from '@react-navigation/native';
-import { fallBackPersonImage, fetchPersonDetails,  fetchPersonMovies,  image342 } from '../api/MovieDB';
+import {fallBackPersonImage, fetchPersonDetails, fetchPersonMovies, fetchPersonTv, image342} from '../api/MovieDB';
 
 
 var {width,height} = Dimensions.get('window');
@@ -21,13 +22,16 @@ const PersonScreen = () => {
     const {params:item}=useRoute();
     const navigation = useNavigation();
     const [isFavourite, toggleFavourite] = useState(false);
-    const [personMovies, setPersonMovies] = useState([])
-    const [person, setPerson] = useState({})
+    const [personMovies, setPersonMovies] = useState([]);
+    const [personTv, setPersonTv] = useState([]);
+    const [person, setPerson] = useState({});
     const [loading, setLoading] = useState(false);
     useEffect(() => {
       setLoading(true);
       getPersondetails(item.id);
       getPersonMovies(item.id);
+      getPersonTv(item.id);
+
     
     }, [item]);
 
@@ -39,6 +43,10 @@ const PersonScreen = () => {
     const getPersonMovies = async id => {
         const data = await fetchPersonMovies(id);
         if (data && data.cast) setPersonMovies(data.cast);
+    }
+    const getPersonTv = async id => {
+        const data = await fetchPersonTv(id);
+        if (data && data.cast) setPersonTv(data.cast);
     }
     
 
@@ -114,6 +122,7 @@ const PersonScreen = () => {
                     </View>
                     {/*movie list*/}
                     <MovieList title={`Movies : ${person?.name}`} hideSeeAll={true} data={personMovies}/>
+                    <TvList name={`Tv Series: ${person?.name}`} hideSeeAll={true} data={personTv}/>
                 </View>
             )
         }
