@@ -9,7 +9,6 @@ import {useNavigation} from "@react-navigation/native";
 import Loading from "../components/loading";
 import {fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies} from "../api/MovieDB";
 import {Image} from "react-native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 
@@ -18,6 +17,7 @@ const ios = Platform.OS =='ios';
 export default function HomeScreen() {
 
     const [trending, setTrending] = useState([]);
+    const [trendingTv, settrendingTv] = useState([]);
     const [upcoming, setUpcoming] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -47,7 +47,7 @@ export default function HomeScreen() {
     <View className="flex-1 bg-neutral-900">
         {/* search bar and logo */}
         <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 " } style={{position:'absolute'}}>
-            <StatusBar style="dark"/>
+            <StatusBar style="light"/>
             
                 <Image style={{
                     height:30,
