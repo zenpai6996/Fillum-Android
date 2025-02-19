@@ -9,6 +9,8 @@ import {useNavigation} from "@react-navigation/native";
 import Loading from "../components/loading";
 import {fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies} from "../api/MovieDB";
 import {Image} from "react-native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 
 
@@ -45,16 +47,16 @@ export default function HomeScreen() {
     <View className="flex-1 bg-neutral-900">
         {/* search bar and logo */}
         <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 " } style={{position:'absolute'}}>
-            <StatusBar style="light"/>
-            <TouchableOpacity onPress={() => navigation.toggleDrawer()} className="rounded-xl p-1 mt-5 ">
+            <StatusBar style="dark"/>
+            
                 <Image style={{
                     height:30,
                     width:30,
-                }} source={require('../assets/menu.png')}/>
-            </TouchableOpacity>
+                }} source={require('../assets/logo3.png')}/>
+          
 
 
-            <TouchableOpacity onPress={() => navigation.navigate('Search')} className="rounded-xl p-1 mt-5 ">
+            <TouchableOpacity onPress={() => navigation.push('Search')} className="rounded-xl p-1 mt-5 ">
                 <Image style={{
                     height:30,
                     width:30,

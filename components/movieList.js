@@ -5,7 +5,6 @@ import { ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 import { Dimensions } from 'react-native';
-import Carousel from 'react-native-reanimated-carousel';
 import {fallBackMoviePoster, image185, image500} from "../api/MovieDB"
 
 var {width,height} = Dimensions.get('window');
@@ -17,7 +16,7 @@ export default function MovieList ({title , data ,hideSeeAll}) {
 
 
   return (
-    <View className="mb-8 space-y-4 bg-neutral-900" style={{marginTop:8}}>
+    <View className="mb-8 space-y-2 bg-neutral-900" style={{marginTop:8}}>
       <View className="mx-4 flex-row justify-between items-center">
         <Text className=" text-xl" style={{fontSize:20,color:'#fff'}}>
           {title}
