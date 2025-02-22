@@ -34,24 +34,26 @@ export default function SearchScreen() {
                 language:'en-US',
                 page:'1'
             }).then(data=>{
-                setLoading(false);
-                if(data && data.results) setResults(data.results);
-            })
-        }else if(value && value.length >2){
-            fetchSearchTv({
-                query:value,
-                include_adult:'false',
-                language:'en-US',
-                page:'1'
-            }).then(data=>{
-                setLoading(false);
-                if(data && data.results) setResults(data.results);
-            })
-        }else{
-            setLoading(false)
-            setResults([])
-        }
-    }
+                if(data && data.results && data.results >0){
+                    setLoading(false);
+                    setResults(data.results);
+                }else{
+                    fetchSearchTv({
+                                query:value,
+                                include_adult:'false',
+                                language:'en-US',
+                                page:'1'
+                            }).then(data=>{
+                                setLoading(false);
+                                if(data && data.results) setResults(data.results);
+                            });
+                        }
+                    });
+                } else {
+                    setLoading(false);
+                    setResults([]);
+                }
+            }
     const handleTextDebounce= useCallback(debounce(handleSearch,400),[]);
     return(
         <SafeAreaView className={"bg-neutral-800 flex-1"}>
@@ -59,13 +61,13 @@ export default function SearchScreen() {
                 <TextInput
                 onChangeText={handleTextDebounce}
                 placeholder="Search for Movies"
-                placeholderTextColor={'lightgray'}
+                placeholderTextColor={'#AB8BFF'}
                 className={" pl-6 flex-1 text-base font-semibold text-white tracking-wider"}
                 />
                 <TouchableOpacity
                     onPress={() => navigation.goBack('Home')}
-                    className={"rounded-full p-3 m-1 bg-neutral-500"}>
-                    <XMarkIcon size="25" color="white"/>
+                    className={"rounded-full  m-1 "}>
+                   <Image  source={require('../assets/x-button.png')} style={{width:50,height:50}}/>
                 </TouchableOpacity>
             </View>
             {/*results*/}
@@ -108,7 +110,9 @@ export default function SearchScreen() {
                                                             }}
                                                         />
                                                         <Text className={"text-neutral-300 ml-1"}>
-                                                            {item?.title.length>18 ? item?.title.slice(0,18)+'...':item?.title}
+                                                        {item?.title ? (item.title.length > 18 ? item.title.slice(0, 18) + '...' : item.title) : (item?.name ? (item.name.length > 18 ? item.name.slice(0, 18) + '...' : item.name) : 'Unknown')}
+
+
                                                         </Text>
                                                     </View>
                                                 </TouchableWithoutFeedback>

@@ -22,11 +22,11 @@ export default function AboutScreen() {
 
             <View className={"flex-row"}>
             <TouchableOpacity onPress={() => Linking.openURL('https://github.com/zenpai6996')} style={{marginRight:20, }} >
-            <Image source={require('../assets/github.png')} style={{ borderWidth:3 , borderColor:"grey", borderRadius:10}}/>
+            <Image source={require('../assets/github.png')} style={{ width:50,height:50}}/>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => Linking.openURL('https://www.linkedin.com/in/souharda-roy-barman-02a835343?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app')} >
-            <Image style={{width:98,height:98,borderWidth:3 , borderColor:"grey", borderRadius:10}} source={require('../assets/linked.png')}/>
+            <Image style={{width:55,height:55}} source={require('../assets/linked.png')}/>
             </TouchableOpacity>
             </View>
         </View>

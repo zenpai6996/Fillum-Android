@@ -1,6 +1,6 @@
 import '../global.css';
 import React, {useEffect, useState} from 'react'
-import {View, Text, Platform, TouchableOpacity, ScrollView} from 'react-native'
+import { View, Text, Platform, TouchableOpacity, ScrollView, Animated} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
 import TrendingMovies from "../components/trendingMovies";
@@ -17,8 +17,9 @@ import {
     fetchUpcomingMovies
 } from "../api/MovieDB";
 import {Image} from "react-native";
-import { Modal, Portal, Button, Provider as PaperProvider } from 'react-native-paper';
+import { Modal,Portal, Button, Provider as PaperProvider } from 'react-native-paper';
 import { Dimensions } from 'react-native';
+
 
 
 
@@ -37,6 +38,7 @@ export default function HomeScreen() {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
+    const slideAnim = useState(new Animated.Value(-width))[0];
     useEffect(() => {
         getTrendingMovies();
         getUpcomingMovies();
@@ -76,35 +78,80 @@ export default function HomeScreen() {
         if(data && data.results) setTopRatedTv(data.results);
         setLoading(false);
     }
+    const openModal =() => {
+        Animated.timing(slideAnim,{
+            toValue:0,
+            duration:300,
+
+            useNativeDriver:true
+        }).start(() => {
+            setVisible(true);
+        });
+    };
+    const closeModal = () => {
+        Animated.timing(slideAnim, {
+            toValue: -width, 
+            duration: 300,
+            useNativeDriver: true,
+        }).start(() => setVisible(false)); 
+    };
     
   return(
     <PaperProvider>
     <View className="flex-1 bg-neutral-900">
         <StatusBar style="light" />
 
-      
+         <SafeAreaView className="absolute z-20 w-full flex-row justify-between items-center px-4" style={{ position: 'absolute' }}>
+                            <TouchableOpacity onPress={openModal} className="rounded-xl p-1 mt-5">
+                                <Image style={{ height: 30, width: 30 }} source={require('../assets/menu.png')} />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity className="rounded-xl p-1 mt-5 " onPress={() => navigation.navigate('Search')} >
+                                <Image style={{ height: 30, width: 30 }} source={require('../assets/search.png')} />
+                            </TouchableOpacity>
+                        </SafeAreaView>
+
         <Portal>
-            <Modal visible={visible} onDismiss={() => setVisible(false)} style={{width:width*0.8}}contentContainerStyle={styles.modalContainer}>
-                <Text style={styles.modalTitle}>Choose Category</Text>
-                <Button mode="contained" onPress={() => { setShowMovies(true); getTrendingMovies(); setVisible(false); }} style={styles.button}>
+
+            <Modal visible={visible} onDismiss={closeModal} transparent={true}  >
+            <TouchableOpacity
+
+            activeOpacity={1} // Ensure the backdrop is clickable
+            onPress={closeModal} // Close the modal when the backdrop is clicked
+        >
+                <Animated.View
+
+                                                    style={[
+                                                            styles.modalContainer,
+                                                        {
+                                                            transform: [{ translateX: slideAnim }],
+                                                        },
+                                                    ]}
+                                                >
+                <TouchableOpacity
+                            onPress={closeModal}
+                            style={styles.closeButton}
+                        >
+                            <Image
+                                source={require('../assets/x-button.png')}
+                                style={{ width: 33, height: 33 }}
+                            />
+                        </TouchableOpacity>
+                <Text style={styles.modalTitle}>Categories :</Text>
+                <Button mode="contained" onPress={() => { setShowMovies(true); getTrendingMovies(); setVisible(false); }} style={styles.button} >
                     Movies
                 </Button>
                 <Button mode="contained" onPress={() => { setShowMovies(false); getTrendingTv(); setVisible(false); }} style={styles.button}>
                  TV Shows
                 </Button>
-            </Modal>
+                <Button mode="contained" style={styles.button}>
+                Favourite Actors
+                </Button>
+                </Animated.View>
+                </TouchableOpacity>
+                </Modal>
         </Portal>
 
-       
-        <SafeAreaView className="absolute z-20 w-full flex-row justify-between items-center px-4" style={{ position: 'absolute' }}>
-            <TouchableOpacity onPress={() => setVisible(true)} className="rounded-xl p-1 mt-5">
-                <Image style={{ height: 30, width: 30 }} source={require('../assets/menu.png')} />
-            </TouchableOpacity>
-
-            <TouchableOpacity className="rounded-xl p-1 mt-5 " onPress={() => navigation.navigate('Search')} >
-                <Image style={{ height: 30, width: 30 }} source={require('../assets/search.png')} />
-            </TouchableOpacity>
-        </SafeAreaView>
 
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 10, backgroundColor: '#171717' }}>
             {loading ? (
@@ -133,21 +180,30 @@ export default function HomeScreen() {
 
 // Styles
 const styles = {
+
     modalContainer: {
     backgroundColor: '#171717',
     padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    
+    borderRadius: 20,
+    width:width*0.8,
+    height:height,
     },
     modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 40,
     color: 'white',
+    marginTop:60
     },
     button: {
     marginVertical: 5,
     width: '100%',
+
     },
+     closeButton: {
+            position: 'absolute',
+            top: 80,
+            right: 25,
+            zIndex: 1,
+        },
     };
