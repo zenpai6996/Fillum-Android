@@ -111,9 +111,10 @@ export default function MovieScreen(){
               movie?.genres?.map((genre,index) =>{
                 let showDot = index+1 != movie.genres.length;
                 return (
-              <Text key={index} className="text-neutral-400 mx-2 font-semibold text-base ">
-                {genre?.name}   {showDot?"•":null}
-              </Text>
+                    <Text key={index} className="text-neutral-400 mx-1 font-semibold text-base">
+                      {genre.name}
+                      {index < 2 ? ' • ' : ''}
+                    </Text>
               )
             })}
           </View>

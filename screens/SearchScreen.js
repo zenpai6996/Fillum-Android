@@ -10,15 +10,14 @@ import {
 } from 'react-native'
 import React, {useCallback, useState} from 'react'
 import {SafeAreaView} from "react-native-safe-area-context";
-import {XMarkIcon} from "react-native-heroicons/outline";
 import {useNavigation} from "@react-navigation/native";
 import Loading from "../components/loading";
 import {debounce} from 'lodash';
 import { fallBackMoviePoster, image185 } from '../api/MovieDB';
-import { fetchSearchMovies } from '../api/MovieDB';
+import { fetchSearchMovies , fetchSearchTv} from '../api/MovieDB';
 
 
-let movieName = "XYZ";
+
 const {width,height} = Dimensions.get('window');
 
 export default function SearchScreen() {
@@ -34,14 +33,26 @@ export default function SearchScreen() {
                 language:'en-US',
                 page:'1'
             }).then(data=>{
-                setLoading(false);
-                if(data && data.results) setResults(data.results);
-            })
-        }else{
-            setLoading(false)
-            setResults([])
-        }
-    }
+                if(data && data.results && data.results >0){
+                    setLoading(false);
+                    setResults(data.results);
+                }else{
+                    fetchSearchTv({
+                                query:value,
+                                include_adult:'false',
+                                language:'en-US',
+                                page:'1'
+                            }).then(data=>{
+                                setLoading(false);
+                                if(data && data.results) setResults(data.results);
+                            });
+                        }
+                    });
+                } else {
+                    setLoading(false);
+                    setResults([]);
+                }
+            }
     const handleTextDebounce= useCallback(debounce(handleSearch,400),[]);
     return(
         <SafeAreaView className={"bg-neutral-800 flex-1"}>
@@ -49,13 +60,13 @@ export default function SearchScreen() {
                 <TextInput
                 onChangeText={handleTextDebounce}
                 placeholder="Search for Movies"
-                placeholderTextColor={'lightgray'}
+                placeholderTextColor={'#AB8BFF'}
                 className={" pl-6 flex-1 text-base font-semibold text-white tracking-wider"}
                 />
                 <TouchableOpacity
                     onPress={() => navigation.goBack('Home')}
-                    className={"rounded-full p-3 m-1 bg-neutral-500"}>
-                    <XMarkIcon size="25" color="white"/>
+                    className={"rounded-full  m-1 "}>
+                   <Image  source={require('../assets/x-button.png')} style={{width:50,height:50}}/>
                 </TouchableOpacity>
             </View>
             {/*results*/}
@@ -75,7 +86,16 @@ export default function SearchScreen() {
                                     {
                                         results.map((item,index) => {
                                             return(
-                                                <TouchableWithoutFeedback key={index} onPress={() => navigation.push("Movie",item)}>
+                                                <TouchableWithoutFeedback
+                                                    key={index}
+                                                    onPress={() => {
+                                                        if (item.title) {
+                                                            navigation.push("Movie", item); // Navigate to the Movie screen if it has a `title`
+                                                        } else if (item.name) {
+                                                            navigation.push("Tv", item); // Navigate to the Tv screen if it has a `name`
+                                                        }
+                                                    }}
+                                                >
                                                     <View className={"space-y-2 mb-4 mt-3"}>
                                                         <Image
                                                             className={"rounded-3xl"}
@@ -89,7 +109,9 @@ export default function SearchScreen() {
                                                             }}
                                                         />
                                                         <Text className={"text-neutral-300 ml-1"}>
-                                                            {item?.title.length>18 ? item?.title.slice(0,18)+'...':item?.title}
+                                                        {item?.title ? (item.title.length > 18 ? item.title.slice(0, 18) + '...' : item.title) : (item?.name ? (item.name.length > 18 ? item.name.slice(0, 18) + '...' : item.name) : 'Unknown')}
+
+
                                                         </Text>
                                                     </View>
                                                 </TouchableWithoutFeedback>
