@@ -68,7 +68,6 @@ export default function AppNavigation() {
                 })}
             >
                 <Tab.Screen name="Home" component={HomeStack} />
-                <Tab.Screen name="Saved" component={SavedMovies} />
                 <Tab.Screen name="About" component={AboutScreen} />
                 
 
@@ -76,3 +75,4 @@ export default function AppNavigation() {
         </NavigationContainer>
     );
 }
+ // <Tab.Screen name="Saved" component={SavedMovies} />

@@ -142,9 +142,6 @@ export default function HomeScreen() {
                 <Button mode="contained" onPress={() => { setShowMovies(false); getTrendingTv(); setVisible(false); }} style={styles.button}>
                  TV Shows
                 </Button>
-                <Button mode="contained" style={styles.button}>
-                Favourite Actors
-                </Button>
                 </Animated.View>
                 </TouchableOpacity>
                 </Modal>
@@ -205,3 +202,6 @@ const styles = {
             zIndex: 1,
         },
     };
+//<Button mode="contained" style={styles.button}>
+                //Favourite Actors
+                //</Button>
