@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 import React, {useCallback, useState} from 'react'
 import {SafeAreaView} from "react-native-safe-area-context";
-import {XMarkIcon} from "react-native-heroicons/outline";
 import {useNavigation} from "@react-navigation/native";
 import Loading from "../components/loading";
 import {debounce} from 'lodash';

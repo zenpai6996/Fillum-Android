@@ -9,7 +9,7 @@ import {fallBackMoviePoster, image185, image500} from "../api/MovieDB"
 
 var {width,height} = Dimensions.get('window');
 
-export default function MovieList ({title , data ,hideSeeAll}) {
+export default function MovieList ({title , data ,hideSeeAll,category}) {
 
   const navigation = useNavigation();
 
@@ -22,8 +22,8 @@ export default function MovieList ({title , data ,hideSeeAll}) {
           {title}
         </Text>
         {!hideSeeAll && (
-          <TouchableOpacity>
-          <Text style={styles.text} className="text-lg">See All</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Category',{title,category})}>
+          <Text style={styles.text} className="text-lg">View all</Text>
         </TouchableOpacity>
         )}
       </View>
@@ -61,7 +61,7 @@ export default function MovieList ({title , data ,hideSeeAll}) {
   )
 }
 
-export function TvList ({name , data ,hideSeeAll}) {
+export function TvList ({name , data ,hideSeeAll,category}) {
 
     const navigation = useNavigation();
 
@@ -74,8 +74,8 @@ export function TvList ({name , data ,hideSeeAll}) {
                     {name}
                 </Text>
                 {!hideSeeAll && (
-                    <TouchableOpacity>
-                        <Text style={styles.text} className="text-lg">See All</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('CategoryTv',{name,category})}>
+                        <Text style={styles.text} className="text-lg">View all</Text>
                     </TouchableOpacity>
                 )}
             </View>

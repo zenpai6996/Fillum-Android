@@ -78,15 +78,13 @@ export default function HomeScreen() {
         if(data && data.results) setTopRatedTv(data.results);
         setLoading(false);
     }
-    const openModal =() => {
+    const openModal = () => {
+        setVisible(true)
         Animated.timing(slideAnim,{
             toValue:0,
             duration:300,
-
-            useNativeDriver:true
-        }).start(() => {
-            setVisible(true);
-        });
+            useNativeDriver:true,
+        }).start();
     };
     const closeModal = () => {
         Animated.timing(slideAnim, {
@@ -116,8 +114,8 @@ export default function HomeScreen() {
             <Modal visible={visible} onDismiss={closeModal} transparent={true}  >
             <TouchableOpacity
 
-            activeOpacity={1} // Ensure the backdrop is clickable
-            onPress={closeModal} // Close the modal when the backdrop is clicked
+            activeOpacity={1}
+            onPress={closeModal}
         >
                 <Animated.View
 
@@ -168,10 +166,10 @@ export default function HomeScreen() {
             )}
 
             {/* Upcoming Movies (Only Show If Movies Are Selected) */}
-            {showMovies ? upcoming.length >0 && <MovieList title="Upcoming Movies" data={upcoming} /> : upcomingTv.length>0 && <TvList name="On Air Tv" data={upcomingTv}/>}
+            {showMovies ? upcoming.length >0 && <MovieList title="Upcoming Movies" category="upcoming" data={upcoming} /> : upcomingTv.length>0 && <TvList category="on_the_air" name="On The Air" data={upcomingTv}/>}
 
             {/* Top Rated Movies (Only Show If Movies Are Selected) */}
-            {showMovies ? topRated.length > 0 && <MovieList title="Top Rated" data={topRated} /> :  topRatedTv.length>0 && <TvList name="Top Rated Tv" data={topRatedTv}/>}
+            {showMovies ? topRated.length > 0 && <MovieList title="Top Rated" category="top_rated" data={topRated} /> :  topRatedTv.length>0 && <TvList category="top_rated" name="Top Rated Tv" data={topRatedTv}/>}
         </ScrollView>
     </View>
 </PaperProvider>
