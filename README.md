@@ -29,7 +29,7 @@ Fillum is designed to be a movie companion/recommendation app for my fellow Cine
 - **Spotlight Section**: Discover information about upcoming directors, actors, and other key contributors in the film industry.
   
  ## Upcoming Features
-- [x] Implementing the "See All" button.
+
 - [x] Implementing a drawer feature on the home screen for better app navigation.
 - [x] Adding API integration for TV series as well.
 
