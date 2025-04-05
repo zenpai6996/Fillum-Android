@@ -32,8 +32,6 @@ Fillum is designed to be a movie companion/recommendation app for my fellow Cine
 - [x] Implementing the "See All" button.
 - [x] Implementing a drawer feature on the home screen for better app navigation.
 - [x] Adding API integration for TV series as well.
-- [ ] Adding your favourite actor or movie to a separate page to keep track .
-- [ ] Add user login
 
 <p align="right">
   <a href="#overview"><img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-blue" alt="Back to Top"></a>
