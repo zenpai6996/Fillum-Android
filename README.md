@@ -14,9 +14,10 @@
 </p>
 
 
-<p style="text-align: center;">
-  <a href="https://github.com/zenpai6996/Fillum-Android/issues/new?template=bug_report.md">Bug Report</a>
-</p>
+ <p align="center">
+     <a href="https://github.com/zenpai6996/Fillum-Android/issues/new?template=bug_report.md">Bug Report</a>
+ </p>
+
 
 ## Overview
 
@@ -33,9 +34,7 @@ Fillum is designed to be a movie companion/recommendation app for my fellow Cine
 - [x] Implementing a drawer feature on the home screen for better app navigation.
 - [x] Adding API integration for TV series as well.
 
-<p align="right">
-  <a href="#overview"><img src="https://img.shields.io/badge/Back%20to%20Top-%E2%86%91-blue" alt="Back to Top"></a>
-</p>
+
 
 
 > [!CAUTION]
