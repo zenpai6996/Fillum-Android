@@ -23,7 +23,7 @@
     "expo-linking": "~7.0.5",
     "expo-router": "~4.0.17",
     "expo-status-bar": "~2.0.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "metro": "^0.81.1",
     "metro-config": "^0.81.1",
     "metro-resolver": "^0.81.1",
